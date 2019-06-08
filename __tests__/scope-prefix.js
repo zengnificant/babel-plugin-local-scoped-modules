@@ -2,8 +2,8 @@ const babel = require('@babel/core');
 const fs = require('fs')
 const path = require('path')
 var filename = process.cwd() + '/d/e/f/index.js'
-const scriptSource = `const d=require('~/a/b/c')`
-const moduleSource = `import d from   '~/a/b/c'`
+const scriptSource = `const d=require('@abc')`
+const moduleSource = `import d from   '@abc'`
 
 const stringSource = `'@abc'`
 const stringRet = '@abc'
