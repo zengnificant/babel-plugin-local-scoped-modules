@@ -1,7 +1,14 @@
 {
   "name": "babel-plugin-local-scoped-modules",
   "version": "0.0.1",
+  "author": "Zengnificant<esafe@sina.com>",
+  "license": "MIT",
   "main": "lib/index.js",
+  "files": [
+    "index.js",
+    "lib",
+    "src"
+  ],
   "scripts": {
     "test": "jest",
     "compile": "gulp build",
@@ -24,6 +31,6 @@
     "uuid": "^3.3.2",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
-  },
-  "license": "MIT"
+  }
+
 }

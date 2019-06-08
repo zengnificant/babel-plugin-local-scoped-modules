@@ -14,7 +14,7 @@ const uuidv4 = function() {
     return `${dash2underline(uuidV4())}`
 }
 
-const defaultOpts = { debug: process.env.NODE_ENV == 'devolepment' ? false : true }
+const defaultOpts = { debug: process.env.NODE_ENV == 'production' ? false : true }
 
 function bundle(opts) {
     opts = Object.assign(defaultOpts, opts)
