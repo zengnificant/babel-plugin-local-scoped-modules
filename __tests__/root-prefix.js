@@ -53,7 +53,6 @@ it('string source  test: project root', () => {
         filename,
         ast: true,
         code: false,
-        presets: ['@babel/preset-env'],
         plugins: [
             ['./lib/']
         ]
