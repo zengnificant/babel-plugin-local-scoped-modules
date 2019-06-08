@@ -13,14 +13,12 @@ export default function getPathType(absPath) {
     if (existsSync(absPath + '.js') || existsSync(absPath + '.json')) {
         return 'file'
     }
-    const exists = existsSync(absPath)
-    if (exists) {
-        const stats = fs.statSync(absPath)
-        if (stats.isFile()) return 'file'
-        if (stats.isDirectory()) {
-            return 'dir'
-        }
+    const basename = path.basename(absPath)
+    if (basename.indexOf('.') > -1) {
+        return 'file'
     }
-    return
+
+    return 'dir'
+
 
 }

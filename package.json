@@ -2,6 +2,12 @@
   "name": "babel-plugin-local-scoped-modules",
   "version": "0.0.1",
   "main": "lib/index.js",
+  "scripts": {
+    "test": "jest",
+    "compile": "gulp build",
+    "prepublish": "npm run test && npm run compile"
+  },
+
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-transform-runtime": "^7.4.4",

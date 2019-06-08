@@ -2,5 +2,6 @@ export default {
     enableScope: true,
     scopes: [],
     rootPrefix: '~',
-    scopePrefix: '@'
+    scopePrefix: '@',
+    treatPathNotExistsAsDir: false
 }
