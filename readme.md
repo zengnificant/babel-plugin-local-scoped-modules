@@ -1,45 +1,52 @@
 #babel-plugin-local-scoped-modules
 
-&emsp;&emsp;这个插件用来避免输入相对路径，比如：`../../../../..`。利用项目根目录符号来代表项目根目录，同时利用具名的字符串来代表项目根目录下的子目录或模块。代码被转译后，这些符号字符串将会被指向正确路径的相对路径替换。因此还是会生成令人讨厌的相对路径，因为这些路径js引擎才能正确识别。
+This plugin intends to avoid  typing  relative paths like `../../../../..` .  Instead, use project-root symbol to  represent the project-root and a scoped name(a scope symbol and a name) to represent a dirname/module under the project-root.Then , when transformed ,these symbols/names will be replaced by relative paths pointing to the exact paths .  Yes,they are still going to be the annoying relative paths for js engines to understand.
 
 
-## English edition  readme:
+##Install
 
-##创建方法
+```shell
+ yarn add  --dev  babel-plugin-local-scoped-modules 
+```
+###or 
+```shell
+ npm install --dev-save  babel-plugin-local-scoped-modules
+```
 
-
-##使用方法 
-下面是一段使用在 `gulpfile.js`中的代码片段：
+##Use 
+Below is the snippet in a `gulpfile.js` on what it is going to be like:
 ```js
     .transform(babelify, {
             plugins: [
                 ["babel-plugin-local-scoped-modules",{
                     /**
-                    1. 初始值 . 
-                    2. require('~/a/b/c') 等价于 require(process.cwd()+'/a/b/c') 但是会被转译成相对路径
-                    
-                    3. process.cwd() 代表这个gulpfile.js所在的项目根目录
+                    1. default one . 
+                    2. require('~/a/b/c') will be like require(process.cwd()+'/a/b/c') 
+                     but   transformed to a relative path to the current file.
+                    3. process.cwd()  means your project-root where this gulpfile.js is .
                      **/
                     rootPrefix:'~', 
 
-                    //初始值
+                    //default one
                     scopePrefix: '@',
 
-                    // 初始值. 设置成false后，仅能使用根目录功能。
+                    // default one. Set false to use just  project-root related paths.
                     enableScope:true,
 
-                    //本地模块. 这些前缀符号应该和上面保持一致。
+                    //local modules. Prefixs should be the same as set above.
                     scopes:[{
                         /**
-                        1. require('@abc')  等价于 require(process.cwd()+'/a/b/c') 但是会被转译成相对路径。
-                        2. process.cwd()  代表这个gulpfile.js所在的项目根目录。
+                        1. require('@abc') will be like require(process.cwd()+'/a/b/c') 
+                        but transformed to a relative path to the current file.
+                        2. process.cwd()  means your project-root where this gulpfile.js is .
                         **/
                         name:'@abc',
                         dir:'~/a/b/c'
                     },{
                        /**
-                       1. require('@def/g') 等价于 require(process.cwd()+'/d/e/f/g') 但是会被转译成相对路径。
-                       2. process.cwd() 代表这个gulpfile.js所在的项目根目录。
+                       1. require('@def/g') will be like require(process.cwd()+'/d/e/f/g') 
+                       but transformed to a relative path to the current file.
+                       2. process.cwd()  means your project-root where this gulpfile.js is .
                        **/
                         name:'@def',
                         dir:'~/d/e/f'
@@ -50,9 +57,8 @@
 
 ```
 
-##为此准备的 Sublime Text 3相关自动路径填充插件
-敬请期待
- 
+##  Prepared related auto_complete plugin for sublime text 3.
+to be present soon
 
-## 授权方式
-MIT
+## Lisense
+  MIT
