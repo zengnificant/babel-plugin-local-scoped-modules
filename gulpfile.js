@@ -20,12 +20,7 @@ function bundle(opts) {
     opts = Object.assign(defaultOpts, opts)
     return browserify(opts)
         .external(['fs', 'path'])
-        .transform(babelify, {
-            presets: ['@babel/preset-env', '@babel/preset-flow'],
-            plugins: [
-                ["@babel/plugin-transform-runtime"]
-            ]
-        })
+        .transform(babelify)
         .bundle()
 }
 
