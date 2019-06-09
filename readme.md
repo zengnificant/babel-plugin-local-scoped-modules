@@ -9,8 +9,8 @@ Install
 ```shell
  yarn add  --dev  babel-plugin-local-scoped-modules 
 ```
-or 
----------------------------------
+**or**
+
 ```shell
  npm install --dev-save  babel-plugin-local-scoped-modules
 ```
@@ -22,35 +22,17 @@ Below is the snippet in a `gulpfile.js` on what it is going to be like:
     .transform(babelify, {
             plugins: [
                 ["babel-plugin-local-scoped-modules",{
-                    /**
-                    1. default one . 
-                    2. require('~/a/b/c') will be like require(process.cwd()+'/a/b/c') 
-                     but   transformed to a relative path to the current file.
-                    3. process.cwd()  means your project-root where this gulpfile.js is .
-                     **/
+                   //defautlt
                     rootPrefix:'~', 
 
-                    //default one
+                    //default 
                     scopePrefix: '@',
 
-                    // default one. Set false to use just  project-root related paths.
-                    enableScope:true,
-
-                    //local modules. Prefixs should be the same as set above.
+                    //local modules. Prefixes should be the same as set above.
                     scopes:[{
-                        /**
-                        1. require('@abc') will be like require(process.cwd()+'/a/b/c') 
-                        but transformed to a relative path to the current file.
-                        2. process.cwd()  means your project-root where this gulpfile.js is .
-                        **/
                         name:'@abc',
                         dir:'~/a/b/c'
-                    },{
-                       /**
-                       1. require('@def/g') will be like require(process.cwd()+'/d/e/f/g') 
-                       but transformed to a relative path to the current file.
-                       2. process.cwd()  means your project-root where this gulpfile.js is .
-                       **/
+                    },{          
                         name:'@def',
                         dir:'~/d/e/f'
                     }]
@@ -59,8 +41,32 @@ Below is the snippet in a `gulpfile.js` on what it is going to be like:
         })
 
 ```
+Suppose this project hierarchy:
 
-  Prepared related auto_complete plugin for sublime text 3.
+  `<projectRoot>/a/b/c/foo.js`
+
+  `<projectRoot>/d/e/f/bar.js`
+
+Now in `bar.js`, how do we suppose to quote `foo.js`?
+
+With  the above  `gulpfile.js` settings,we just:
+```js
+ import foo from '~/a/b/c/foo' // var foo= require('~/a/b/c/foo')
+
+```
+  
+ or 
+
+```js
+ import foo from '@abc/foo' //   var foo=require('@abc/foo') 
+
+```
+
+After transformed ,it'll work fine.
+
+
+
+Editor auto-completions:
 ---------------------------------
 to be present soon
 
