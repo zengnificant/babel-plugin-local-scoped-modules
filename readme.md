@@ -62,8 +62,7 @@ With  the above  `gulpfile.js` settings,we just:
 
 ```
 
-After transformed ,it'll work fine.
-
+After transformed ,it'll work fine. These stringLiterals will turn to be a relative path.
 
 
 Editor auto-completions:
