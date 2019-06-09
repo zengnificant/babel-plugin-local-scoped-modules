@@ -1,7 +1,5 @@
 export default {
-    enableScope: true,
-    scopes: [],
     rootPrefix: '~',
     scopePrefix: '@',
-    treatPathNotExistsAsDir: false
+    scopes: []
 }

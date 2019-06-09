@@ -4,7 +4,7 @@ import getPathType from './getPathType.js'
 
 type scopeType = { name: string, dir: string };
 type stateType = { filename: string, cwd: string };
-type Options = { rootPrefix: string, scopePrefix: string, enableScope: boolean, scopes: Array < ? scopeType > };
+type Options = { rootPrefix: string, scopePrefix: string, scopes: Array < ? scopeType > };
 
 export default function getRelativePath(targetPath: string, state: stateType, opts: Options): ? string {
     const absolutePath: ? string = getAbsolutePath(targetPath, state, opts)
@@ -23,11 +23,10 @@ export default function getRelativePath(targetPath: string, state: stateType, op
 
 function getAbsolutePath(targetPath: string, state: stateType, opts: Options) : ? string {
     const { cwd } = state
-    const { rootPrefix, scopePrefix, enableScope, scopes } = opts
+    const { rootPrefix, scopePrefix, scopes } = opts
     if (isValidRootPrefixPath(targetPath, rootPrefix)) {
         return getStretchedRootPrefixPath(targetPath, state, opts)
     }
-    if (!enableScope) return;
     if (isZeroScope(scopes)) return;
     if (!isValidScopePath(targetPath, scopePrefix)) return;
     return getStretchedScopePrefixPath(targetPath, state, opts)
