@@ -17,9 +17,9 @@ Install
 
 Usage 
 ---------------------------------
-Below is the snippet in a `gulpfile.js` on what it is going to be like:
+Below is  a `.babelrc` config on what it is going to be like:
 ```js
-    .transform(babelify, {
+  {
             presets: ['@babel/preset-env'],
             plugins: [
                 ["babel-plugin-local-scoped-modules",{
@@ -39,7 +39,7 @@ Below is the snippet in a `gulpfile.js` on what it is going to be like:
                     }]
                 }]
             ]
-        })
+  }
 
 ```
 Suppose this project hierarchy:
@@ -50,7 +50,7 @@ Suppose this project hierarchy:
 
 Now in `bar.js`, how do we suppose to quote `foo.js`?
 
-With  the above  `gulpfile.js` settings,we just:
+With  the above  `.babelrc` settings,we just:
 ```js
  import foo from '~/a/b/c/foo' // var foo= require('~/a/b/c/foo')
 
