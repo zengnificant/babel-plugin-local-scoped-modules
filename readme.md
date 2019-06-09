@@ -1,6 +1,6 @@
 babel-plugin-local-scoped-modules
 ================
-This plugin intends to avoid  typing  relative paths like `../../../../..` .  Instead, use project-root symbol to  represent the project-root and a scoped name(a scope symbol and a name) to represent a dirname/module under the project-root.Then , when transformed ,these symbols/names will be replaced by relative paths pointing to the exact paths .  Yes,they are still going to be the annoying relative paths for js engines to understand.
+This plugin intends to avoid  typing  relative paths like `../../../../..` .  Use a project-root symbol to  represent the project-root and a scoped name(a scope symbol and a name) to represent a dirname/module under the project-root.Then , when transformed ,these symbols/names will be replaced by relative paths pointing to the exact paths .  Yes,they are still going to be the annoying relative paths for js engines to understand.
 
 
 Install
@@ -15,11 +15,12 @@ Install
  npm install --dev-save  babel-plugin-local-scoped-modules
 ```
 
-Use 
+Usage 
 ---------------------------------
 Below is the snippet in a `gulpfile.js` on what it is going to be like:
 ```js
     .transform(babelify, {
+            presets: ['@babel/preset-env'],
             plugins: [
                 ["babel-plugin-local-scoped-modules",{
                    //defautlt
@@ -65,9 +66,12 @@ With  the above  `gulpfile.js` settings,we just:
 After transformed ,it'll work fine. These stringLiterals will turn to be a relative path.
 
 
+
+
 Editor auto-completions:
 ---------------------------------
-to be present soon
++ sublime plugin:
+     - [LocalScopedModules](https://github.com/zengnificant/LocalScopedModules)
 
  Lisense
 ---------------------------------

@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-local-scoped-modules",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "author": "Zengnificant<1269580641@qq.com>",
   "license": "MIT",
   "main": "lib/index.js",
@@ -10,6 +10,10 @@
     "src"
   ],
   "keywords": ["babel-plugin", "scoped namespace", "no-relative-path"],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:zengnificant/babel-plugin-local-scoped-modules.git"
+  },
   "scripts": {
     "test": "jest",
     "compile": "gulp build",
