@@ -67,6 +67,7 @@ function getStretchedScopePrefixPath(scopePrefixPath: string, state: stateType, 
     const { rootPrefix, scopePrefix, scopes } = opts
 
     scopes.some(scope => {
+        if (!scope) return false
         const { name, dir } = scope
         if (!name || !dir) return false
         if (name.startsWith(scopePrefix) && scopePrefixPath.startsWith(name)) {
