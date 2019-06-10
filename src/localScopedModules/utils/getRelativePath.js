@@ -1,22 +1,31 @@
 //@flow
 import sysPath from 'path'
 import getPathType from './getPathType.js'
-
+import pathStoreManager from './pathStoreManager.js'
 type scopeType = { name: string, dir: string };
 type stateType = { filename: string, cwd: string };
 type Options = { rootPrefix: string, scopePrefix: string, scopes: Array < ? scopeType > };
 
 export default function getRelativePath(targetPath: string, state: stateType, opts: Options): ? string {
+    let targetDirname: string, relativePath: string;
+    const cacheTargetPath = targetPath
+    const { filename } = state
+    let curDirname: string = sysPath.dirname(filename)
+    const store = pathStoreManager.getStore()
+    if (cacheTargetPath in store) {
+        targetDirname = store[cacheTargetPath]
+        relativePath = sysPath.relative(curDirname, targetDirname)
+        return relativePath
+    }
+
     const absolutePath: ? string = getAbsolutePath(targetPath, state, opts)
     if (!absolutePath) return;
     const absolutePathType: ? string = getPathType(absolutePath)
     if (!absolutePathType) return;
-    let targetDirname: string = absolutePath
+    targetDirname = absolutePath
     if (absolutePathType === 'file') targetDirname = sysPath.dirname(absolutePath)
-    const { filename } = state
-    let curDirname: string = sysPath.dirname(filename),
-        relativePath: string = sysPath.relative(curDirname, targetDirname)
-
+    pathStoreManager.addItem(cacheTargetPath, targetDirname)
+    relativePath = sysPath.relative(curDirname, targetDirname)
     return relativePath
 }
 
