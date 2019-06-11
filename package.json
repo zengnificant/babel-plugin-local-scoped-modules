@@ -1,15 +1,19 @@
 {
   "name": "babel-plugin-local-scoped-modules",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "author": "Zengnificant<1269580641@qq.com>",
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
-    "index.js",
     "lib",
-    "src"
+    "src",
+    "__tests__",
+    "gulpfile.js",
+    ".babelrc",
+    ".flowconfig",
+    ".gitignore"
   ],
-  "keywords": ["babel-plugin", "scoped namespace", "no-relative-path"],
+  "keywords": ["babel-plugin", "relative-path", "no-relative-path"],
   "repository": {
     "type": "git",
     "url": "git@github.com:zengnificant/babel-plugin-local-scoped-modules.git"

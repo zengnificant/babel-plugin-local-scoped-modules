@@ -1,34 +1,33 @@
 //@flow
 import sysPath from 'path'
 import getPathType from './getPathType.js'
-import pathStoreManager from './pathStoreManager.js'
+import { resolve, eject, resolveItem, ejectItem } from './pathStoreManager.js'
 type scopeType = { name: string, dir: string };
 type stateType = { filename: string, cwd: string };
 type Options = { rootPrefix: string, scopePrefix: string, scopes: Array < ? scopeType > };
-
 export default function getRelativePath(targetPath: string, state: stateType, opts: Options): ? string {
     let targetDirname: string, relativePath: string;
     const cacheTargetPath = targetPath
+    if (cacheTargetPath in eject) {
+        return;
+    }
     const { filename } = state
     let curDirname: string = sysPath.dirname(filename)
-    const store = pathStoreManager.getStore()
-    if (cacheTargetPath in store) {
-        targetDirname = store[cacheTargetPath]
+    if (cacheTargetPath in resolve) {
+        targetDirname = resolve[cacheTargetPath]
         relativePath = sysPath.relative(curDirname, targetDirname)
         return relativePath
     }
-
     const absolutePath: ? string = getAbsolutePath(targetPath, state, opts)
-    if (!absolutePath) return;
-    const absolutePathType: ? string = getPathType(absolutePath)
-    if (!absolutePathType) return;
+    if (!absolutePath) { ejectItem(cacheTargetPath); return; }
+    // absolutePathType  is ether 'dir' or 'file'.  Needn't eject.
+    const absolutePathType: string = getPathType(absolutePath)
     targetDirname = absolutePath
     if (absolutePathType === 'file') targetDirname = sysPath.dirname(absolutePath)
-    pathStoreManager.addItem(cacheTargetPath, targetDirname)
+    resolveItem(cacheTargetPath, targetDirname)
     relativePath = sysPath.relative(curDirname, targetDirname)
     return relativePath
 }
-
 
 function getAbsolutePath(targetPath: string, state: stateType, opts: Options) : ? string {
     const { cwd } = state
@@ -65,7 +64,6 @@ function getStretchedScopePrefixPath(scopePrefixPath: string, state: stateType, 
     let stretchedScopePrefixPath: ? string;
     const { cwd } = state
     const { rootPrefix, scopePrefix, scopes } = opts
-
     scopes.some(scope => {
         if (!scope) return false
         const { name, dir } = scope
