@@ -29,13 +29,12 @@ Below is  a `.babelrc` config on what it is going to be like:
                     //default 
                     scopePrefix: '@',
 
-                    //local modules. Prefixes should be the same as set above.
+                    //local modules. Prefixes should be the 
+                    //same as set above.
                     scopes:[{
                         name:'@abc',
+                        alias:'@ab/c',
                         dir:'~/a/b/c'
-                    },{          
-                        name:'@def',
-                        dir:'~/d/e/f'
                     }]
                 }]
             ]
@@ -63,6 +62,15 @@ With  the above  `.babelrc` settings,we just:
 
 ```
 
+or 
+
+```js
+ import foo from '@ab/c/foo' //   var foo=require('@ab/c/foo') 
+
+```
+
+The last one could be very useful in some cases.
+
 After transformed ,it'll work fine. These stringLiterals will turn to be a relative path.
 
 
@@ -72,6 +80,16 @@ Editor auto-completions:
 ---------------------------------
 + sublime plugin:
      - [LocalScopedModules](https://github.com/zengnificant/LocalScopedModules)
+
+
+
+Change Log
+--------------------------------
+
+**"0.1.4" - 2019-06-13**
+
+  + add feature alias for scopeName 
+  +  also update  sublime plugin [LocalScopedModules](https://github.com/zengnificant/LocalScopedModules) 
 
  Lisense
 ---------------------------------
