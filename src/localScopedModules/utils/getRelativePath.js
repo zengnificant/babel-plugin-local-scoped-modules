@@ -72,7 +72,6 @@ function getStretchedScopePrefixPath(scopePrefixPath: string, state: stateType, 
     let stretchedScopePrefixPath: ? string;
     const { cwd} = state
     const { rootPrefix, scopePrefix, scopes } = opts
-    console.log(scopePrefixPath,scopes)
     scopes.some(scope => {
         if (!scope) return false
         const { name, dir} = scope        
