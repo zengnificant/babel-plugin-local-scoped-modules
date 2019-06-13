@@ -1,19 +1,17 @@
 {
   "name": "babel-plugin-local-scoped-modules",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "author": "Zengnificant<1269580641@qq.com>",
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
-    "lib",
-    "src",
-    "__tests__",
-    "gulpfile.js",
-    ".babelrc",
-    ".flowconfig",
-    ".gitignore"
+    "lib"
   ],
-  "keywords": ["babel-plugin", "relative-path", "no-relative-path"],
+  "keywords": [
+    "babel-plugin",
+    "relative-path",
+    "no-relative-path"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:zengnificant/babel-plugin-local-scoped-modules.git"
@@ -23,7 +21,6 @@
     "compile": "gulp build",
     "prepublish": "npm run compile &&npm run test"
   },
-
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-transform-runtime": "^7.4.4",
@@ -41,8 +38,6 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.5"
+    "@babel/runtime": "^7.4.5",
   }
-
-
 }

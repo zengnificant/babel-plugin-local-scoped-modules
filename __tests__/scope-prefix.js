@@ -4,7 +4,7 @@ const path = require('path')
 var filename = process.cwd() + '/d/e/f/index.js'
 const scriptSource = `const d=require('@abc')`
 const moduleSource = `import d from   '@abc'`
-
+const complexSource = `import d from   '@ab/c'`
 const stringSource = `'@abc'`
 const stringRet = '@abc'
 
@@ -36,6 +36,23 @@ it('module source test: scope  @abc', () => {
         ]
     })
     let { code } = babel.transformFromAstSync(ast, moduleSource, {
+        filename,
+        ast: false,
+        code: true,
+    });
+    expect(code).toContain(relaPath);
+});
+
+it('complex source test: scope  @ab/c', () => {
+    const { ast } = babel.transformSync(complexSource, {
+        filename,
+        ast: true,
+        code: false,
+        plugins: [
+            ['./lib/', { scopes: [{ name: '@ab/c', dir: '~/a/b/c' }] }]
+        ]
+    })
+    let { code } = babel.transformFromAstSync(ast, complexSource, {
         filename,
         ast: false,
         code: true,
