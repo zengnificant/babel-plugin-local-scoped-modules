@@ -86,6 +86,13 @@ Editor auto-completions:
 Change Log
 --------------------------------
 
+**"0.2.0" - 2019-06-15**
+
++ fix 2 bugs:
+    + left out the  basename if `sourcePath` is file
+    + caused an unexpected result if `sourceDir` string includes `curDir`  string
+
+
 **"0.1.4" - 2019-06-13**
 
   + add feature alias for scopeName 
