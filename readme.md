@@ -90,6 +90,11 @@ Editor auto-completions:
 Change Log
 --------------------------------
 
+
+**"0.2.1" - 2019-06-15**
+
++ fix a typing mistake.
+ 
 **"0.2.0" - 2019-06-15**
 
 + fix 2 bugs:

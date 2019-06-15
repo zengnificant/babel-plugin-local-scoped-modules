@@ -21,7 +21,7 @@ export function pathRelative(cur, target) {
     let curDirname, targetDirname, targetBasename, relativePath
 
     const curType = getPathType(cur)
-    const targetType = getPathType(cur)
+    const targetType = getPathType(target)
     curDirname = cur
     if (curType === 'file') {
         curDirname = dirname(cur)
