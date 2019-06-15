@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-local-scoped-modules",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "author": "Zengnificant<1269580641@qq.com>",
   "license": "MIT",
   "main": "lib/index.js",
@@ -19,7 +19,7 @@
   "scripts": {
     "test": "jest",
     "compile": "gulp build",
-    "prepublish": "npm run compile &&npm run test"
+    "prepublish": "export NODE_ENV=production&&npm run compile &&npm run test"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
