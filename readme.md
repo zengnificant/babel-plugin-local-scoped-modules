@@ -83,6 +83,10 @@ Editor auto-completions:
 
 
 
+ Lisense
+---------------------------------
+  MIT
+
 Change Log
 --------------------------------
 
@@ -98,6 +102,3 @@ Change Log
   + add feature alias for scopeName 
   +  also update  sublime plugin [LocalScopedModules](https://github.com/zengnificant/LocalScopedModules) 
 
- Lisense
----------------------------------
-  MIT
