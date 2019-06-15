@@ -1,32 +1,26 @@
 //@flow
-import sysPath from 'path'
-import getPathType from './getPathType.js'
+import {pathRelative} from './pathUtils.js'
 import escapeStringRegexp from './escape-string-regexp'
 import { resolve, eject, resolveItem, ejectItem } from './pathStoreManager.js'
 type scopeType = { name: string, dir: string};
 type stateType = { filename: string, cwd: string };
 type Options = { rootPrefix: string, scopePrefix: string, scopes: Array < ? scopeType > };
 export default function getRelativePath(targetPath: string, state: stateType, opts: Options): ? string {
-    let targetDirname: string, relativePath: string;
+    let absolutePath: ?string,relativePath: string;
     const cacheTargetPath = targetPath
     if (cacheTargetPath in eject) {
         return;
     }
     const { filename } = state
-    let curDirname: string = sysPath.dirname(filename)
     if (cacheTargetPath in resolve) {
-        targetDirname = resolve[cacheTargetPath]
-        relativePath = sysPath.relative(curDirname, targetDirname)
+        absolutePath = resolve[cacheTargetPath]
+        relativePath = pathRelative(filename, absolutePath)
         return relativePath
     }
-    const absolutePath: ? string = getAbsolutePath(targetPath, state, opts)
+    absolutePath= getAbsolutePath(targetPath, state, opts)
     if (!absolutePath) { ejectItem(cacheTargetPath); return; }
-    // absolutePathType  is ether 'dir' or 'file'.  Needn't eject.
-    const absolutePathType: string = getPathType(absolutePath)
-    targetDirname = absolutePath
-    if (absolutePathType === 'file') targetDirname = sysPath.dirname(absolutePath)
-    resolveItem(cacheTargetPath, targetDirname)
-    relativePath = sysPath.relative(curDirname, targetDirname)
+    resolveItem(cacheTargetPath, absolutePath)
+    relativePath = pathRelative(filename , absolutePath)
     return relativePath
 }
 
