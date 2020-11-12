@@ -44,9 +44,8 @@ function getSource(path, methodname, state) {
     }
 
     if (source.type === "BinaryExpression") {
-        let left = source.left,
-            value = left.value
-        if (left.type === 'StringLiteral' && source.operator === '+' && value.indexOf('/') > -1) {
+        let left = source.left
+        if (left.type === 'StringLiteral' && source.operator === '+' && left.value.indexOf('/') > -1) {
             return left
         }
     }
