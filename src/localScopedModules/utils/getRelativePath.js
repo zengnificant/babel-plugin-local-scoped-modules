@@ -1,12 +1,12 @@
 //@flow
-import {pathRelative} from './pathUtils.js'
+import { pathRelative } from './pathUtils.js'
 import escapeStringRegexp from './escape-string-regexp'
 import { resolve, eject, resolveItem, ejectItem } from './pathStoreManager.js'
-type scopeType = { name: string, dir: string};
+type scopeType = { name: string, dir: string };
 type stateType = { filename: string, cwd: string };
 type Options = { rootPrefix: string, scopePrefix: string, scopes: Array < ? scopeType > };
 export default function getRelativePath(targetPath: string, state: stateType, opts: Options): ? string {
-    let absolutePath: ?string,relativePath: string;
+    let absolutePath: ? string, relativePath : string;
     const cacheTargetPath = targetPath
     if (cacheTargetPath in eject) {
         return;
@@ -17,10 +17,10 @@ export default function getRelativePath(targetPath: string, state: stateType, op
         relativePath = pathRelative(filename, absolutePath)
         return relativePath
     }
-    absolutePath= getAbsolutePath(targetPath, state, opts)
+    absolutePath = getAbsolutePath(targetPath, state, opts)
     if (!absolutePath) { ejectItem(cacheTargetPath); return; }
     resolveItem(cacheTargetPath, absolutePath)
-    relativePath = pathRelative(filename , absolutePath)
+    relativePath = pathRelative(filename, absolutePath)
     return relativePath
 }
 
@@ -56,27 +56,26 @@ function isZeroScope(scopes: Array < ? scopeType > ): boolean {
 }
 
 
-function isValidScopeName(scopeName:string,scopePrefix:string):boolean{
+function isValidScopeName(scopeName: string, scopePrefix: string): boolean {
     let regex = new RegExp(`^${escapeStringRegexp(scopePrefix)}[\-_0-9A-z/]+$`)
 
-    return  regex.test(scopeName)
+    return regex.test(scopeName)
 }
 
 function getStretchedScopePrefixPath(scopePrefixPath: string, state: stateType, opts: Options): ? string {
     let stretchedScopePrefixPath: ? string;
-    const { cwd} = state
+    const { cwd } = state
     const { rootPrefix, scopePrefix, scopes } = opts
     scopes.some(scope => {
         if (!scope) return false
-        const { name, dir} = scope        
+        const { name, dir } = scope
         if (!name || !dir) return false
-        if (isValidScopeName(name,scopePrefix) && scopePrefixPath.startsWith(name)) {
+        if (isValidScopeName(name, scopePrefix) && scopePrefixPath.startsWith(name)) {
             const stretchedDir = dir.replace(rootPrefix, cwd)
             stretchedScopePrefixPath = scopePrefixPath.replace(name, stretchedDir)
             return true
         }
         return false
     })
-
     return stretchedScopePrefixPath
 }

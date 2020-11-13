@@ -18,10 +18,12 @@ function getPathType(absPath) {
 export function pathRelative(cur, target) {
     cur = normalize(cur)
     target = normalize(target)
+
     let curDirname, targetDirname, targetBasename, relativePath
 
     const curType = getPathType(cur)
     const targetType = getPathType(target)
+
     curDirname = cur
     if (curType === 'file') {
         curDirname = dirname(cur)
@@ -37,6 +39,9 @@ export function pathRelative(cur, target) {
 
     if (targetDirname.indexOf(curDirname) > -1) {
         relativePath = curPrefix + relativePath
+    }
+    if (relativePath.endsWith('..')) {
+        relativePath += sep
     }
     return relativePath
 }
