@@ -35,6 +35,9 @@ export function pathRelative(cur, target) {
         targetBasename = basename(target)
     }
     relativePath = sysRelative(curDirname, targetDirname)
+    if (targetDirname.endsWith(sep)) {
+        relativePath += sep
+    }
     if (targetBasename) relativePath = join(relativePath, targetBasename)
 
     if (targetDirname.indexOf(curDirname) > -1) {

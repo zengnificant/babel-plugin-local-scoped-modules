@@ -4,9 +4,9 @@ const path = require('path')
 var filename = process.cwd() + '/a/b/c/index.js'
 const scriptSource = `var a='test1'
 var b='check.js'
-var c=require('@abc/v'+a+b)`
+var c=require('@abc/v/'+a+b)`
 
-const relaPath = path.relative(process.cwd() + '/a/b/c', process.cwd() + '/a/b')
+const relaPath = path.relative(process.cwd() + '/a/b/c', process.cwd() + '/a/b/v')
 it('script source test: expression in scope', () => {
     const { ast } = babel.transformSync(scriptSource, {
         filename,
