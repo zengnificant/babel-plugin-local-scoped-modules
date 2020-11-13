@@ -19,7 +19,7 @@ export default methodPairs
 function myFn(path, state, methodname) {
     let opts = { ...config, ...state.opts }
     opts.scopes = flatScopes(opts.scopes)
-    let source = getSource(path, methodname, state)
+    let source = getSource(path, methodname)
     if (!source) return;
     let targetPath = source.value
     let relativePath = getRelativePath(targetPath, state, opts)
@@ -27,7 +27,7 @@ function myFn(path, state, methodname) {
     source.value = relativePath
 }
 
-function getSource(path, methodname, state) {
+function getSource(path, methodname) {
     let source;
     if (methodname === 'CallExpression') {
         if (path.node.callee.name !== 'require') return;
@@ -42,11 +42,16 @@ function getSource(path, methodname, state) {
     if (source.type === 'StringLiteral') {
         return source
     }
-
-    if (source.type === "BinaryExpression") {
+    while (source.type === "BinaryExpression") {
         let left = source.left
+        if (left.type === "BinaryExpression") {
+            source = source.left;
+            continue;
+        }
         if (left.type === 'StringLiteral' && source.operator === '+' && left.value.indexOf('/') > -1) {
             return left
+        } else {
+            break;
         }
     }
     return;
