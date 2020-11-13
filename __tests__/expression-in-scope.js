@@ -4,7 +4,7 @@ const path = require('path')
 var filename = process.cwd() + '/d/e/f/index.js'
 const scriptSource = `var a='test'
 var b='check'
-var c=require('@abc/'+a+c)`
+var c=require('@abc/'+a+b)`
 
 const relaPath = path.relative(process.cwd() + '/d/e/f/', process.cwd() + '/a/b/c')
 it('script source test: expression in scope', () => {
