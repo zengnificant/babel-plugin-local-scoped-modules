@@ -1,5 +1,6 @@
 export default {
     rootPrefix: '~',
     scopePrefix: '@',
-    scopes: []
+    scopes: [],
+    calleeNames: ['require']
 }

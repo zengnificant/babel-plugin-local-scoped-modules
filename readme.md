@@ -89,10 +89,10 @@ Editor auto-completions:
 
 Change Log
 --------------------------------
-**"0.99.2" - 2020-11-15**
+**"0.100.1" - 2020-11-15**
 
-+  figure out that  there is no need to compare the whole source string  with filename.  Part of it(the scope thing) is totally ok.
-+  many changes of code
++  add `calleeNames:Array` option (used in configure file  `.babelrc`) to support for some functions to transform scoped string  when these functions are called. (always include `require`)。
++  fix a bug:  if a transformed relativePath should start with './', in version of '0.99' , it will be deleted. now it is ok.
 
 
 **"0.3.3" - 2020-11-14**

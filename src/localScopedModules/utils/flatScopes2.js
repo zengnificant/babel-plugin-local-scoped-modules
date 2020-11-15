@@ -1,5 +1,4 @@
 import flatScopes from './flatScopes.js'
-import config from '../config.js'
 
 export default function(state, opts) {
     const { cwd } = state

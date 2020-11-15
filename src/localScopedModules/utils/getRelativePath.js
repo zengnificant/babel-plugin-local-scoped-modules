@@ -3,7 +3,7 @@ import { pathRelative } from './pathUtils.js'
 import escapeStringRegexp from './escape-string-regexp'
 import { resolve, eject, resolveItem, ejectItem } from './pathStoreManager.js'
 import flatScopes from './flatScopes2.js'
-import { normalize } from 'path'
+import { sep } from 'path'
 type scopeType = { name: string, dir: string };
 type stateType = { filename: string, cwd: string };
 type Options = { rootPrefix: string, scopePrefix: string, scopes: Array < ? scopeType > };
@@ -27,9 +27,10 @@ export default function getRelativePath(targetPath: string, state: stateType, op
     let theScopeName = dividedPaths[0],
         restPath = dividedPaths[1]
 
-    const stretchedScopePath = getStretchedScopePath(theScopeName)
-    partRelativePath = pathRelative(filename, stretchedScopePath, { isDir: true })
-    return normalize(partRelativePath + restPath)
+    stretchedPath = getStretchedScopePath(theScopeName)
+    partRelativePath = pathRelative(filename, stretchedPath, { isDir: true })
+    let wholePath = partRelativePath + restPath
+    return wholePath.replace(sep + sep, sep)
 
     //don't allow to use more than one scoped namespace in a path.
 

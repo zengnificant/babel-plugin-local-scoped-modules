@@ -17,7 +17,14 @@ export default methodPairs
 
 function myFn(path, state, methodname) {
     let opts = { ...config, ...state.opts }
-    let source = getSource(path, methodname)
+
+    if (!Array.isArray(opts.calleeNames)) {
+        opts.calleeNames = []
+    }
+    if (!opts.calleeNames.includes('require')) {
+        opts.calleeNames.push('require')
+    }
+    let source = getSource(path, methodname, opts)
     if (!source) return;
     let targetPath = source.value
     let relativePath = getRelativePath(targetPath, state, opts)
@@ -25,10 +32,12 @@ function myFn(path, state, methodname) {
     source.value = relativePath
 }
 
-function getSource(path, methodname) {
+function getSource(path, methodname, opts) {
     let source;
     if (methodname === 'CallExpression') {
-        if (path.node.callee.name !== 'require') return;
+        let calleeName = path.node.callee.name
+        const { calleeNames } = opts
+        if (!calleeNames.includes(calleeName)) return;
         const args = path.node.arguments;
         if (!args.length) return;
         source = path.node.arguments[0]
