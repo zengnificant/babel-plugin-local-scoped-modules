@@ -89,7 +89,19 @@ Editor auto-completions:
 
 Change Log
 --------------------------------
+**"0.99.2" - 2020-11-15**
 
++  figure out that  there is no need to compare the whole source string  with filename.  Part of it(the scope thing) is totally ok.
++  many changes of code
+
+
+**"0.3.3" - 2020-11-14**
+
++  add partial support for binaryExpression like:
+  ```js
+    var a='k'
+    var b=requre('@test/'+a)
+  ```
 
 **"0.2.1" - 2019-06-15**
 
