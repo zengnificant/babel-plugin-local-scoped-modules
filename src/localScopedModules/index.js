@@ -1,5 +1,4 @@
 import config from './config'
-import flatScopes from './flatScopes.js'
 import getRelativePath from './utils/getRelativePath.js'
 const methodNames = [
     "CallExpression",
@@ -18,7 +17,6 @@ export default methodPairs
 
 function myFn(path, state, methodname) {
     let opts = { ...config, ...state.opts }
-    opts.scopes = flatScopes(opts.scopes)
     let source = getSource(path, methodname)
     if (!source) return;
     let targetPath = source.value

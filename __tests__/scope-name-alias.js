@@ -2,8 +2,9 @@ const babel = require('@babel/core');
 const fs = require('fs')
 const path = require('path')
 var filename = process.cwd() + '/d/e/f/index.js'
-const relaPath = path.relative(process.cwd() + '/d/e/f/', process.cwd() + '/a/b/c')
 const aliasSource = `const d=require('@a/bc')`
+
+const testStr = '@a'
 
 it('test 0: scope  @abc alias @a/bc', () => {
     const { ast } = babel.transformSync(aliasSource, {
@@ -19,7 +20,7 @@ it('test 0: scope  @abc alias @a/bc', () => {
         ast: false,
         code: true,
     });
-    expect(code).toContain(relaPath);
+    expect(code).not.toContain(testStr);
 });
 
 
@@ -37,5 +38,5 @@ it('test1: scope  @abc alias @a/bc', () => {
         ast: false,
         code: true,
     });
-    expect(code).toContain(relaPath);
+    expect(code).not.toContain(testStr);
 });

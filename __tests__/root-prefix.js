@@ -8,7 +8,7 @@ const stringSource = `'~/a/b/c'`
 const stringRet = '~/a/b/c'
 
 
-const relaPath = path.relative(process.cwd() + '/d/e/f', process.cwd() + '/a/b/c')
+const testStr = '~/a/b/c'
 
 
 it(`script source test: project-root`, () => {
@@ -25,7 +25,7 @@ it(`script source test: project-root`, () => {
         code: true,
 
     });
-    expect(code).toContain(relaPath);
+    expect(code).not.toContain(testStr);
 });
 
 
@@ -43,7 +43,7 @@ it('module source  test: project root', () => {
         filename,
         code: true,
     });
-    expect(code).toContain(relaPath);
+    expect(code).not.toContain(testStr);
 });
 
 

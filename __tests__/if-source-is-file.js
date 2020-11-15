@@ -4,7 +4,8 @@ const path = require('path')
 var filename = process.cwd() + '/d/e/f/index.js'
 const scriptSource = `const foo=require('~/a/b/c/d.js')`
 
-const relaPath = path.relative(process.cwd() + '/d/e/f', process.cwd() + '/a/b/c') + '/d.js'
+const testStr = '~/a/b/c/d.js'
+
 
 
 it(`if-source-is-file test: project-root`, () => {
@@ -21,5 +22,5 @@ it(`if-source-is-file test: project-root`, () => {
         code: true,
 
     });
-    expect(code).toContain(relaPath);
+    expect(code).not.toContain(testStr);
 });

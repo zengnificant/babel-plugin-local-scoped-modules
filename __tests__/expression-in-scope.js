@@ -6,7 +6,7 @@ const scriptSource = `var a='test1'
 var b='check.js'
 var c=require('@abc/v/'+a+b)`
 
-const relaPath = path.relative(process.cwd() + '/a/b/c', process.cwd() + '/a/b/v')
+const testStr = '@abc/v/'
 it('script source test: expression in scope', () => {
     const { ast } = babel.transformSync(scriptSource, {
         filename,
@@ -23,5 +23,5 @@ it('script source test: expression in scope', () => {
         ast: false,
         code: true,
     });
-    expect(code).toContain(relaPath);
+    expect(code).not.toContain(testStr);
 });

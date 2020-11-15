@@ -6,9 +6,9 @@ const scriptSource = `const d=require('@abc')`
 const moduleSource = `import d from   '@abc'`
 const complexSource = `import d from   '@ab/c'`
 const stringSource = `'@abc'`
-const stringRet = '@abc'
 
-const relaPath = path.relative(process.cwd() + '/d/e/f/', process.cwd() + '/a/b/c')
+
+const testStr = '@ab'
 it('script source test: scope  @abc', () => {
     const { ast } = babel.transformSync(scriptSource, {
         filename,
@@ -23,7 +23,7 @@ it('script source test: scope  @abc', () => {
         ast: false,
         code: true,
     });
-    expect(code).toContain(relaPath);
+    expect(code).not.toContain(testStr);
 });
 it('module source test: scope  @abc', () => {
     const { ast } = babel.transformSync(moduleSource, {
@@ -40,7 +40,7 @@ it('module source test: scope  @abc', () => {
         ast: false,
         code: true,
     });
-    expect(code).toContain(relaPath);
+    expect(code).not.toContain(testStr);
 });
 
 it('complex source test: scope  @ab/c', () => {
@@ -57,7 +57,8 @@ it('complex source test: scope  @ab/c', () => {
         ast: false,
         code: true,
     });
-    expect(code).toContain(relaPath);
+
+    expect(code).not.toContain(testStr);
 });
 
 
@@ -75,5 +76,5 @@ it('string source test: scope  @abc', () => {
         ast: false,
         code: true,
     });
-    expect(code).toContain(stringRet);
+    expect(code).toContain(testStr);
 });

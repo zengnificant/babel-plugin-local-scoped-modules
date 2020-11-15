@@ -15,15 +15,15 @@ function getPathType(absPath) {
     return 'dir'
 }
 
-export function pathRelative(cur, target) {
+export function pathRelative(cur, target, opts = {}) {
     cur = normalize(cur)
     target = normalize(target)
 
     let curDirname, targetDirname, targetBasename, relativePath
+    let { isDir } = opts
 
     const curType = getPathType(cur)
-    const targetType = getPathType(target)
-
+    const targetType = isDir == true ? "dir" : getPathType(target)
     curDirname = cur
     if (curType === 'file') {
         curDirname = dirname(cur)
