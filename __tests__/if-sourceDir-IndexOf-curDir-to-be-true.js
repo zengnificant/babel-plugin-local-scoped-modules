@@ -1,11 +1,8 @@
 const babel = require('@babel/core');
-const fs = require('fs')
-const path = require('path')
 var filename = process.cwd() + '/a/index.js'
 const scriptSource = `const foo=require('~/a/b/c/d.js')`
 
 const testStr = '~/a/b/c/d.js'
-
 
 it(`if-sourceDir-IndexOf-curDir-to-be-true test: project-root`, () => {
     const { ast } = babel.transformSync(scriptSource, {
@@ -21,6 +18,7 @@ it(`if-sourceDir-IndexOf-curDir-to-be-true test: project-root`, () => {
         code: true,
 
     });
+    console.log(code)
 
     expect(code).not.toContain(testStr);
 });

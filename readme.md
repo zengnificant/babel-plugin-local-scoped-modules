@@ -89,6 +89,10 @@ Editor auto-completions:
 
 Change Log
 --------------------------------
+**"0.100.2" - 2020-11-18**
+
++   use rootDir to compare  with filename, code becomes cleaner.
+
 **"0.100.1" - 2020-11-15**
 
 +  add `calleeNames:Array` option (used in configure file  `.babelrc`) to support for some functions to transform scoped string  when these functions are called. (always include `require`)。
@@ -105,17 +109,5 @@ Change Log
 
 **"0.2.1" - 2019-06-15**
 
-+ fix a typing mistake.
++ a stable version.
  
-**"0.2.0" - 2019-06-15**
-
-+ fix 2 bugs:
-    + left out the  basename if `sourcePath` is file
-    + caused an unexpected result if `sourceDir` string includes `curDir`  string
-
-
-**"0.1.4" - 2019-06-13**
-
-  + add feature alias for scopeName 
-  +  also update  sublime plugin [LocalScopedModules](https://github.com/zengnificant/LocalScopedModules) 
-

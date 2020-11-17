@@ -1,6 +1,4 @@
 const babel = require('@babel/core');
-const fs = require('fs')
-const path = require('path')
 var filename = process.cwd() + '/d/e/f/index.js'
 const scriptSource = `const foo=require('~/a/b/c')`
 const moduleSource = `import foo from   '~/a/b/c'`
