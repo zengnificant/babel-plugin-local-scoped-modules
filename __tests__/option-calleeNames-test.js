@@ -1,12 +1,11 @@
 const babel = require('@babel/core');
-const fs = require('fs')
-const path = require('path')
-var filename = process.cwd() + '/a/b/c/index.js'
+var filename = process.cwd() + '/d/e/f/index.js'
 const scriptSource = `var a=MyCalleeName('@abc/v/');
-var b=require('@abc/v/')
+var b=require('@abc/v/test/d.js')
 `
 const testStr = '@abc/v/'
-it('script source test: expression in scope', () => {
+
+it('calleeNames test', () => {
     const { ast } = babel.transformSync(scriptSource, {
         filename,
         ast: true,
@@ -24,6 +23,5 @@ it('script source test: expression in scope', () => {
         ast: false,
         code: true,
     });
-    console.log(code)
     expect(code).not.toContain(testStr);
 });

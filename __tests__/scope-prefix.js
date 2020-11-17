@@ -1,14 +1,12 @@
 const babel = require('@babel/core');
-const fs = require('fs')
-const path = require('path')
 var filename = process.cwd() + '/d/e/f/index.js'
 const scriptSource = `const d=require('@abc')`
 const moduleSource = `import d from   '@abc'`
 const complexSource = `import d from   '@ab/c'`
 const stringSource = `'@abc'`
 
-
 const testStr = '@ab'
+
 it('script source test: scope  @abc', () => {
     const { ast } = babel.transformSync(scriptSource, {
         filename,
@@ -25,6 +23,7 @@ it('script source test: scope  @abc', () => {
     });
     expect(code).not.toContain(testStr);
 });
+
 it('module source test: scope  @abc', () => {
     const { ast } = babel.transformSync(moduleSource, {
         filename,

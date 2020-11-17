@@ -1,6 +1,4 @@
 const babel = require('@babel/core');
-const fs = require('fs')
-const path = require('path')
 var filename = process.cwd() + '/d/e/f/index.js'
 const aliasSource = `const d=require('@a/bc')`
 

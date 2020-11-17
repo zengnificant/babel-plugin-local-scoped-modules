@@ -16,6 +16,7 @@ let methodPairs = methodNames.map(name => {
 export default methodPairs
 
 function myFn(path, state, methodname) {
+
     let opts = { ...config, ...state.opts }
 
     if (!Array.isArray(opts.calleeNames)) {
@@ -27,6 +28,7 @@ function myFn(path, state, methodname) {
     let source = getSource(path, methodname, opts)
     if (!source) return;
     let targetPath = source.value
+
     let relativePath = getRelativePath(targetPath, state, opts)
     if (!relativePath) return;
     source.value = relativePath
