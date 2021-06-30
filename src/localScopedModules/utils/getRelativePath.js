@@ -3,7 +3,7 @@ import { pathRelative } from './pathUtils.js'
 import escapeStringRegexp from './escape-string-regexp'
 import { resolve, eject, resolveItem, ejectItem } from './pathStoreManager.js'
 import flatScopes from './flatScopes.js'
-import { sep } from 'path'
+import { normalize,sep } from 'path'
 type scopeType = { name: string, dir: string };
 type stateType = { filename: string, cwd: string };
 type Options = { rootPrefix: string, scopePrefix: string, scopes: Array < ? scopeType > };
@@ -27,9 +27,8 @@ export default function getRelativePath(targetPath: string, state: stateType, op
         scopeDict = transformScopesToDict(),
         restPath1 = scopeName === rootPrefix ? '' : scopeDict[scopeName].slice(rootPrefix.length),
         restPath2 = targetPath.slice(scopeName.length),
-        wholePath = relativeString + restPath1 + restPath2
+        wholePath = relativeString + normalize(restPath1 + restPath2)
     return wholePath.replace(sep + sep, sep)
-
 
 
     function getRelativeString() {
@@ -41,7 +40,7 @@ export default function getRelativePath(targetPath: string, state: stateType, op
         let scopeName;
         scopes.some(scope => {
             let curScopeName = scope.name
-            if (targetPath === curScopeName || (targetPath.startsWith(`${curScopeName+sep}`) && targetPath.split(curScopeName).length === 2)) {
+            if (targetPath === curScopeName || (targetPath.startsWith(`${curScopeName}/`) && targetPath.split(curScopeName).length === 2)) {
                 scopeName = curScopeName
                 return true
             }
@@ -52,7 +51,8 @@ export default function getRelativePath(targetPath: string, state: stateType, op
 
     function isValidScopeName(targetPath: string) : boolean {
         let regex = new RegExp(`^${escapeStringRegexp(scopePrefix)}[\-_0-9A-z/]+`)
-        return (targetPath.startsWith(`${rootPrefix+sep}`) && targetPath.split(rootPrefix).length === 2) ||
+        return targetPath=rootPrefix||
+        (targetPath.startsWith(`${rootPrefix}/`) && targetPath.split(rootPrefix).length === 2) ||
             (regex.test(targetPath) && targetPath.split(scopePrefix).length === 2)
     }
 
