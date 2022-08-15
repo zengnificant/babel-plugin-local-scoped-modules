@@ -1,11 +1,12 @@
 {
   "name": "babel-plugin-local-scoped-modules",
-  "version": "0.110.1",
+  "version": "0.120.1",
   "author": "Zengnificant<1269580641@qq.com>",
   "license": "MIT",
   "main": "lib/index.min.js",
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "keywords": [
     "babel-plugin",

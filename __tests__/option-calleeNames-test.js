@@ -2,6 +2,7 @@ const babel = require('@babel/core');
 var filename = process.cwd() + '/d/e/f/index.js'
 const scriptSource = `var a=MyCalleeName('@abc/v/');
 var b=require('@abc/v/test/d.js')
+
 `
 const testStr = '@abc/v/'
 

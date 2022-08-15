@@ -8,7 +8,7 @@ type scopeType = { name: string, dir: string };
 type stateType = { filename: string, cwd: string };
 type Options = { rootPrefix: string, scopePrefix: string, scopes: Array < ? scopeType > };
 export default function getRelativePath(targetPath: string, state: stateType, opts: Options): ? string {
-
+    
     const { cwd, filename } = state
     const { rootPrefix, scopePrefix } = opts
     const cacheTargetPath = targetPath
@@ -51,6 +51,7 @@ export default function getRelativePath(targetPath: string, state: stateType, op
 
     function isValidScopeName(targetPath: string) : boolean {
         let regex = new RegExp(`^${escapeStringRegexp(scopePrefix)}[\-_0-9A-z/]+`)
+
         return targetPath=rootPrefix||
         (targetPath.startsWith(`${rootPrefix}/`) && targetPath.split(rootPrefix).length === 2) ||
             (regex.test(targetPath) && targetPath.split(scopePrefix).length === 2)
